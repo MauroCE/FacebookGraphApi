@@ -46,10 +46,11 @@ def get_group_post_attachments(graph, since=None, until=None):
                     for subattachment in subattachments:
                         if 'video' in subattachment['type']:
                             video_list.append(handle_videos(subattachment,
-                                                            post))
+                                                            post, graph))
                 else:
                     if 'video' in attachment['type']:
-                        video_list.append(handle_videos(attachment, post))
+                        video_list.append(handle_videos(attachment, post,
+                                                        graph))
         except KeyError:
             continue
     for video in video_list:
@@ -57,7 +58,7 @@ def get_group_post_attachments(graph, since=None, until=None):
     return video_list
 
 
-def handle_videos(attachment, post):
+def handle_videos(attachment, post, g):
     """
     This function handles what to do when an attachment is actually a video.
     In this case it just outputs the id of the attachment, the url to the video
@@ -68,6 +69,8 @@ def handle_videos(attachment, post):
     :type attachment:
     :param post:
     :type post:
+    :param g: graphAPI
+    :type g: facebook.GraphAPI
     :return:video_id, url, image, post_id, post_message, time
     :rtype: tuple
 
