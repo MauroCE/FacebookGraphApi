@@ -1,12 +1,14 @@
+# External Modules
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+# Internal Modules
 from connect import get_graph
 from config import FACEBOOK_GROUP_ID
 from group import get_group_post_attachments
-from selenium.webdriver.common.keys import Keys
 
 
 def send_whatsapp_msg(target, msg):
@@ -33,8 +35,10 @@ def send_whatsapp_msg(target, msg):
     group_title = wait.until(ec.presence_of_element_located((By.XPATH, x_arg)))
     group_title.click()
     inp_xpath = '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
-    input_box = wait.until(ec.presence_of_element_located((By.XPATH, inp_xpath)))
-    input_box.send_keys(string + Keys.ENTER)
+    input_box = wait.until(
+        ec.presence_of_element_located((By.XPATH, inp_xpath))
+    )
+    input_box.send_keys(msg + Keys.ENTER)
     driver.close()
 
 

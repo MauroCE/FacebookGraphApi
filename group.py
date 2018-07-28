@@ -1,9 +1,9 @@
 # Import external modules
-from datetime import datetime, timedelta
 import dateutil.parser as dateparser
+from datetime import datetime, timedelta
 # Import internal modules
-from config import FACEBOOK_GROUP_ID
 from connect import get_graph
+from config import FACEBOOK_GROUP_ID
 
 
 def get_group_post_attachments(graph, since=None, until=None):
@@ -103,5 +103,5 @@ def pretty_print_video_alert(video_tuple):
 
 
 if __name__ == "__main__":
-    g, _ = get_graph()
-    vid_list = get_group_post_attachments(g, since='2018-01-01')
+    gr, _ = get_graph()
+    vid_list = get_group_post_attachments(gr, since='2018-01-01')
